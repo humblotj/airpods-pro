@@ -12,6 +12,11 @@ import FakeLink from './components/FakeLink';
 
 gsap.registerPlugin(ScrollTrigger);
 
+const config = JSON.parse(process.env.REACT_APP_API_KEY as any);
+firebase.initializeApp({
+  ...config,
+});
+
 if (process.env.NODE_ENV !== 'development') {
   firebase.analytics();
 }
