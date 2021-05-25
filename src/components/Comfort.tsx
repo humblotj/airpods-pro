@@ -7,65 +7,65 @@ import explodeTips from '../assets/explode-tips.json';
 const Comfort = () => {
   const ref = useRef<HTMLDivElement>(null);
   const {
-    enterLeaveTrigger, loadAnimation, scrollTrigger, animateFromTo, animateTo,
-  } = useAnimation(ref);
+    enterLeaveTrigger, loadAnimation, lottieScroll, animateFromTo, animateTo,
+  } = useAnimation(ref, true);
 
   const move = (className: string, start: number,
-    duration: number, immediateRender: boolean = true) => {
-    animateFromTo(className, { y: 40 }, { y: -40 }, start, duration, immediateRender);
+    end: number, immediateRender: boolean = true) => {
+    animateFromTo(className, { y: 40 }, { y: -40 }, start, end, immediateRender);
   };
 
-  const opacity = (className: string, start: number, duration: number,
+  const opacity = (className: string, start: number, end: number,
     to: number, immediateRender: boolean = true) => {
-    animateTo(className, { opacity: to }, start, 3, immediateRender);
+    animateTo(className, { opacity: to }, start, end, immediateRender);
   };
 
   useEffect(() => {
     enterLeaveTrigger('.lottie-animation-2, .lottie-animation-3, .lottie-animation-4');
 
     const headAnimation = loadAnimation('.lottie-animation-2', head);
-    scrollTrigger(headAnimation, {
+    lottieScroll(headAnimation, {
       start: 0,
-      duration: 40,
+      end: 40,
       to: 100,
     });
 
     opacity('.lottie-animation-2', 0, 1, 1);
 
-    move('.comfort-heading-wrapper', 30, 10);
-    opacity('.comfort-heading-wrapper', 30, 3, 1);
-    opacity('.comfort-heading-wrapper', 37, 3, 0, false);
+    move('.comfort-heading-wrapper', 30, 40);
+    opacity('.comfort-heading-wrapper', 30, 33, 1);
+    opacity('.comfort-heading-wrapper', 37, 40, 0, false);
 
     const flipAnimation = loadAnimation('.lottie-animation-3', flip);
-    scrollTrigger(flipAnimation, {
+    lottieScroll(flipAnimation, {
       start: 40,
-      duration: 20,
+      end: 60,
       to: 99,
     });
-    opacity('.lottie-animation-3', 39, 1, 1);
-    opacity('.lottie-animation-2', 40, 1, 0, false);
+    opacity('.lottie-animation-3', 39, 40, 1);
+    opacity('.lottie-animation-2', 40, 41, 0, false);
 
-    move('.comfort-intro-text-wrapper', 55, 10);
-    opacity('.comfort-intro-text-wrapper', 55, 1, 1);
+    move('.comfort-intro-text-wrapper', 55, 65);
+    opacity('.comfort-intro-text-wrapper', 55, 56, 1);
 
     const flipNCAnimation = loadAnimation('.lottie-animation-4', explodeTips);
-    scrollTrigger(flipNCAnimation, {
+    lottieScroll(flipNCAnimation, {
       start: 60,
-      duration: 40,
+      end: 100,
       to: 100,
     });
-    opacity('.lottie-animation-4', 59, 1, 1);
+    opacity('.lottie-animation-4', 59, 60, 1);
 
-    opacity('.comfort-intro-text-wrapper', 60, 5, 0, false);
-    opacity('.lottie-animation-3', 60, 1, 0, false);
+    opacity('.comfort-intro-text-wrapper', 60, 65, 0, false);
+    opacity('.lottie-animation-3', 60, 61, 0, false);
 
-    move('.choose-size', 65, 20);
-    opacity('.choose-size', 65, 10, 1);
-    opacity('.comfort-tips', 75, 4, 1);
-    opacity('.choose-size', 80, 5, 0, false);
-    opacity('.comfort-tips', 87, 3, 0, false);
-    opacity('.lottie-animation-5', 99, 1, 1);
-    opacity('.lottie-animation-4', 99, 1, 0, false);
+    move('.choose-size', 65, 85);
+    opacity('.choose-size', 65, 70, 1);
+    opacity('.comfort-tips', 75, 79, 1);
+    opacity('.choose-size', 80, 85, 0, false);
+    opacity('.comfort-tips', 87, 90, 0, false);
+    opacity('.lottie-animation-5', 99, 100, 1);
+    opacity('.lottie-animation-4', 99, 100, 0, false);
   }, []);
 
   return (

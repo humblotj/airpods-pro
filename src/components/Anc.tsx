@@ -7,17 +7,17 @@ import transparency from '../assets/transparency.json';
 const Anc = () => {
   const ref = useRef<HTMLDivElement>(null);
   const {
-    enterLeaveTrigger, loadAnimation, scrollTrigger, animateFromTo, animateTo,
+    enterLeaveTrigger, loadAnimation, lottieScroll, animateFromTo, animateTo,
   } = useAnimation(ref);
 
   const move = (className: string, start: number,
-    duration: number, immediateRender: boolean = true) => {
-    animateFromTo(className, { y: 40 }, { y: -40 }, start, duration, immediateRender);
+    end: number, immediateRender: boolean = true) => {
+    animateFromTo(className, { y: 40 }, { y: -40 }, start, end, immediateRender);
   };
 
-  const opacity = (className: string, start: number, duration: number,
+  const opacity = (className: string, start: number, end: number,
     to: number, immediateRender: boolean = true) => {
-    animateTo(className, { opacity: to }, start, 3, immediateRender);
+    animateTo(className, { opacity: to }, start, end, immediateRender);
   };
 
   useEffect(() => {
@@ -27,48 +27,48 @@ const Anc = () => {
     opacity('.anc-intro', 0, 5, 1);
 
     const flipNCAnimation = loadAnimation('.lottie-animation-5', flipNC);
-    scrollTrigger(flipNCAnimation, {
+    lottieScroll(flipNCAnimation, {
       start: 1,
-      duration: 19,
+      end: 20,
       to: 45,
     });
 
-    opacity('.anc-intro', 10, 5, 0, false);
+    opacity('.anc-intro', 10, 15, 0, false);
 
-    move('.anc-intro-paragraph', 15, 10);
-    opacity('.anc-intro-paragraph', 15, 2, 1);
-    opacity('.anc-intro-paragraph', 20, 5, 0, false);
+    move('.anc-intro-paragraph', 15, 25);
+    opacity('.anc-intro-paragraph', 15, 17, 1);
+    opacity('.anc-intro-paragraph', 20, 25, 0, false);
 
-    move('.anc-external-mic, .anc-external-sound', 25, 10);
-    opacity('.anc-external-mic, .anc-external-sound', 25, 2, 1);
-    opacity('.anc-external-mic, .anc-external-sound', 32, 3, 0, false);
+    move('.anc-external-mic, .anc-external-sound', 25, 35);
+    opacity('.anc-external-mic, .anc-external-sound', 25, 27, 1);
+    opacity('.anc-external-mic, .anc-external-sound', 32, 35, 0, false);
 
-    move('.anc-continousley, .anc-internal-mic', 35, 10);
-    opacity('.anc-continousley, .anc-internal-mic', 35, 2, 1);
-    opacity('.anc-continousley, .anc-internal-mic', 42, 3, 0, false);
+    move('.anc-continousley, .anc-internal-mic', 35, 45);
+    opacity('.anc-continousley, .anc-internal-mic', 35, 37, 1);
+    opacity('.anc-continousley, .anc-internal-mic', 42, 45, 0, false);
 
-    scrollTrigger(flipNCAnimation, {
+    lottieScroll(flipNCAnimation, {
       start: 45,
-      duration: 5,
+      end: 50,
       to: 100,
     });
 
     const transparencyAnimation = loadAnimation('.lottie-animation-6', transparency);
-    scrollTrigger(transparencyAnimation, {
+    lottieScroll(transparencyAnimation, {
       start: 50,
-      duration: 50,
+      end: 100,
       to: 99,
     });
-    opacity('.lottie-animation-5', 50, 1, 0, false);
-    opacity('.lottie-animation-6', 50, 1, 1);
-    move('.anc-transparency', 65, 10);
-    opacity('.anc-transparency', 65, 5, 1);
-    animateFromTo('.anc-transparency', { opacity: 0.75 }, { opacity: 1 }, 65, 10, false);
+    opacity('.lottie-animation-5', 50, 51, 0, false);
+    opacity('.lottie-animation-6', 50, 51, 1);
+    move('.anc-transparency', 65, 75);
+    opacity('.anc-transparency', 65, 70, 1);
+    animateFromTo('.anc-transparency', { opacity: 0.75 }, { opacity: 1 }, 65, 75, false);
 
-    opacity('.airpods-nav', 79, 1, 0, false);
-    animateTo('.body', { background: 'white' }, 79, 1, false);
-    opacity('.white-overlay', 90, 10, 1);
-    opacity('.lottie-animation-6', 99, 1, 0, false);
+    opacity('.airpods-nav', 79, 80, 0, false);
+    animateTo('.body', { background: 'white' }, 79, 80, false);
+    opacity('.white-overlay', 90, 100, 1);
+    opacity('.lottie-animation-6', 99, 100, 0, false);
   }, []);
 
   return (

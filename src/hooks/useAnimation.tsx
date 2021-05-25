@@ -3,7 +3,7 @@ import { gsap } from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
 import lottie, { AnimationItem } from 'lottie-web';
 
-const useAnimation = (ref: RefObject<HTMLDivElement>) => {
+const useAnimation = (ref: RefObject<HTMLDivElement>, animationStartEntering = false) => {
   const loadAnimation = (className: string, animationData: any) => lottie.loadAnimation({
     container: document.querySelector(className) as Element,
     renderer: 'canvas',
@@ -18,36 +18,41 @@ const useAnimation = (ref: RefObject<HTMLDivElement>) => {
       return;
     }
 
+    const animationStart = animationStartEntering ? 'top bottom' : 'top top';
+    const animationEnd = 'bottom bottom';
+
     ScrollTrigger.create({
       trigger: element,
       scrub: true,
-      start: 'top top',
-      end: 'bottom bottom',
+      start: animationStart,
+      end: animationEnd,
       onLeave: () => {
         gsap.set(document.querySelectorAll(leave), { opacity: 0 });
       },
       onEnter: () => {
         if (enter) {
-          console.log('ok');
           gsap.set(document.querySelectorAll(enter), { opacity: 1 });
         }
       },
     });
   };
 
-  const scrollTrigger = (animation: AnimationItem, {
-    start, duration, to,
-  }:{ start: number, duration: number, to: number}) => {
+  const lottieScroll = (animation: AnimationItem, {
+    start, end, to,
+  }:{ start: number, end: number, to: number}) => {
     const element = ref.current;
     if (!element) {
       return;
     }
 
+    const animationStart = animationStartEntering ? `${(element.offsetHeight + window.innerHeight) * (start / 100)} bottom` : `${start}% ${start}%`;
+    const animationEnd = animationStartEntering ? `+=${(element.offsetHeight + window.innerHeight) * ((end - start) / 100)}` : `+=${element.offsetHeight * ((end - start) / 100)}`;
+
     ScrollTrigger.create({
       trigger: element,
       scrub: true,
-      start: `${start}% ${start}%`,
-      end: `+=${element.scrollHeight * (duration / 100)}`,
+      start: animationStart,
+      end: animationEnd,
       onUpdate: (self) => {
         animation.goToAndStop(self.progress * (animation.totalFrames - 1) * (to / 100), true);
       },
@@ -55,11 +60,14 @@ const useAnimation = (ref: RefObject<HTMLDivElement>) => {
   };
 
   const animateFromTo = (className: string, from: any,
-    to: any, start: number, duration: number, immediateRender: boolean = true) => {
+    to: any, start: number, end: number, immediateRender: boolean = true) => {
     const element = ref.current;
     if (!element) {
       return;
     }
+
+    const animationStart = animationStartEntering ? `${(element.offsetHeight + window.innerHeight) * (start / 100)} bottom` : `${start}% ${start}%`;
+    const animationEnd = animationStartEntering ? `+=${(element.offsetHeight + window.innerHeight) * ((end - start) / 100)}` : `+=${element.offsetHeight * ((end - start) / 100)}`;
 
     gsap.fromTo(document.querySelectorAll(className), from,
       {
@@ -68,18 +76,21 @@ const useAnimation = (ref: RefObject<HTMLDivElement>) => {
         scrollTrigger: {
           trigger: element,
           scrub: true,
-          start: `${start}% ${start})%`,
-          end: `+=${element.offsetHeight * (duration / 100)}`,
+          start: animationStart,
+          end: animationEnd,
         },
       });
   };
 
   const animateTo = (className: string, to: any,
-    start: number, duration: number, immediateRender: boolean = true) => {
+    start: number, end: number, immediateRender: boolean = true) => {
     const element = ref.current;
     if (!element) {
       return;
     }
+
+    const animationStart = animationStartEntering ? `${(element.offsetHeight + window.innerHeight) * (start / 100)} bottom` : `${start}% ${start}%`;
+    const animationEnd = animationStartEntering ? `+=${(element.offsetHeight + window.innerHeight) * ((end - start) / 100)}` : `+=${element.offsetHeight * ((end - start) / 100)}`;
 
     gsap.to(document.querySelectorAll(className),
       {
@@ -88,14 +99,14 @@ const useAnimation = (ref: RefObject<HTMLDivElement>) => {
         scrollTrigger: {
           trigger: element,
           scrub: true,
-          start: `${start}% ${start}%`,
-          end: `+=${element.offsetHeight * (duration / 100)}`,
+          start: animationStart,
+          end: animationEnd,
         },
       });
   };
 
   return {
-    enterLeaveTrigger, loadAnimation, scrollTrigger, animateFromTo, animateTo,
+    enterLeaveTrigger, loadAnimation, lottieScroll, animateFromTo, animateTo,
   };
 };
 
