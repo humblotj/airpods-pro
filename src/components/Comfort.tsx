@@ -21,8 +21,6 @@ const Comfort = () => {
   };
 
   useEffect(() => {
-    enterLeaveTrigger('.lottie-animation-2, .lottie-animation-3, .lottie-animation-4');
-
     const headAnimation = loadAnimation('.lottie-animation-2', head);
     lottieScroll(headAnimation, {
       start: 0,
@@ -48,8 +46,8 @@ const Comfort = () => {
     move('.comfort-intro-text-wrapper', 55, 65);
     opacity('.comfort-intro-text-wrapper', 55, 56, 1);
 
-    const flipNCAnimation = loadAnimation('.lottie-animation-4', explodeTips);
-    lottieScroll(flipNCAnimation, {
+    const explodeTipsAnimation = loadAnimation('.lottie-animation-4', explodeTips);
+    lottieScroll(explodeTipsAnimation, {
       start: 60,
       end: 100,
       to: 100,
