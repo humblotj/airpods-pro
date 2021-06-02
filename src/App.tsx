@@ -2,7 +2,7 @@
 import { useEffect } from 'react';
 import { gsap } from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
-import firebase from 'firebase';
+import firebase from 'firebase/app';
 import 'firebase/analytics';
 
 import './App.css';
