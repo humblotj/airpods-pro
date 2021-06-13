@@ -64,6 +64,7 @@ const Comfort = () => {
     opacity('.comfort-tips', 87, 90, 0, false);
     opacity('.lottie-animation-5', 99, 100, 1);
     opacity('.lottie-animation-4', 99, 100, 0, false);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

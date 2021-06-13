@@ -69,6 +69,7 @@ const Anc = () => {
     animateTo('.body', { background: 'white' }, 79, 80, false);
     opacity('.white-overlay', 90, 100, 1);
     opacity('.lottie-animation-6', 99, 100, 0, false);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

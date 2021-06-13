@@ -1,18 +1,20 @@
-import { RefObject } from 'react';
+import { RefObject, useCallback } from 'react';
 import { gsap } from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
 import lottie, { AnimationItem } from 'lottie-web';
 
 const useAnimation = (ref: RefObject<HTMLDivElement>, animationStartEntering = false) => {
-  const loadAnimation = (className: string, animationData: any) => lottie.loadAnimation({
-    container: document.querySelector(className) as Element,
-    renderer: 'canvas',
-    animationData,
-    loop: false,
-    autoplay: false,
-  });
+  const loadAnimation = useCallback(
+    (className: string, animationData: any) => lottie.loadAnimation({
+      container: document.querySelector(className) as Element,
+      renderer: 'canvas',
+      animationData,
+      loop: false,
+      autoplay: false,
+    }), [],
+  );
 
-  const enterLeaveTrigger = (leave: string, enter?:string) => {
+  const enterLeaveTrigger = useCallback((leave: string, enter?:string) => {
     const element = ref.current;
     if (!element) {
       return;
@@ -35,9 +37,9 @@ const useAnimation = (ref: RefObject<HTMLDivElement>, animationStartEntering = f
         }
       },
     });
-  };
+  }, [ref, animationStartEntering]);
 
-  const lottieScroll = (animation: AnimationItem, {
+  const lottieScroll = useCallback((animation: AnimationItem, {
     start, end, to,
   }:{ start: number, end: number, to: number}) => {
     const element = ref.current;
@@ -57,9 +59,9 @@ const useAnimation = (ref: RefObject<HTMLDivElement>, animationStartEntering = f
         animation.goToAndStop(self.progress * (animation.totalFrames - 1) * (to / 100), true);
       },
     });
-  };
+  }, [ref, animationStartEntering]);
 
-  const animateFromTo = (className: string, from: any,
+  const animateFromTo = useCallback((className: string, from: any,
     to: any, start: number, end: number, immediateRender: boolean = true) => {
     const element = ref.current;
     if (!element) {
@@ -80,9 +82,9 @@ const useAnimation = (ref: RefObject<HTMLDivElement>, animationStartEntering = f
           end: animationEnd,
         },
       });
-  };
+  }, [ref, animationStartEntering]);
 
-  const animateTo = (className: string, to: any,
+  const animateTo = useCallback((className: string, to: any,
     start: number, end: number, immediateRender: boolean = true) => {
     const element = ref.current;
     if (!element) {
@@ -103,7 +105,7 @@ const useAnimation = (ref: RefObject<HTMLDivElement>, animationStartEntering = f
           end: animationEnd,
         },
       });
-  };
+  }, [ref, animationStartEntering]);
 
   return {
     enterLeaveTrigger, loadAnimation, lottieScroll, animateFromTo, animateTo,

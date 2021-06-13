@@ -48,6 +48,7 @@ const Hero = () => {
     animateHeroBullet(4, 80);
 
     animateTo('.lottie-animation-1', { opacity: 0 }, 97, 100, false);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
