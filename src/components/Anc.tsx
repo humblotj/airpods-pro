@@ -66,7 +66,7 @@ const Anc = () => {
     animateFromTo('.anc-transparency', { opacity: 0.75 }, { opacity: 1 }, 65, 75, false);
 
     opacity('.airpods-nav', 79, 80, 0, false);
-    animateTo('.body', { background: 'white' }, 79, 80, false);
+    animateFromTo('.body', { background: '#000' }, { background: '#fff' }, 79, 80);
     opacity('.white-overlay', 90, 100, 1);
     opacity('.lottie-animation-6', 99, 100, 0, false);
   // eslint-disable-next-line react-hooks/exhaustive-deps
