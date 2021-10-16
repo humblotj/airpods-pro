@@ -2,8 +2,8 @@
 import { useEffect } from 'react';
 import { gsap } from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
-import firebase from 'firebase/app';
-import 'firebase/analytics';
+import { initializeApp, FirebaseOptions } from 'firebase/app';
+import { getAnalytics } from 'firebase/analytics';
 
 import './App.css';
 import Hero from './components/Hero';
@@ -17,13 +17,12 @@ import Thanks from './components/Thanks';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const config = JSON.parse(process.env.REACT_APP_API_KEY as any);
-firebase.initializeApp({
-  ...config,
-});
-
+const firebaseConfig: FirebaseOptions = JSON.parse(
+  process.env.REACT_APP_API_KEY,
+);
+initializeApp(firebaseConfig);
 if (process.env.NODE_ENV !== 'development') {
-  firebase.analytics();
+  getAnalytics();
 }
 
 function App() {
