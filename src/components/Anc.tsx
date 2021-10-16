@@ -7,16 +7,36 @@ import transparency from '../assets/transparency.json';
 const Anc = () => {
   const ref = useRef<HTMLDivElement>(null);
   const {
-    enterLeaveTrigger, loadAnimation, lottieScroll, animateFromTo, animateTo,
+    enterLeaveTrigger,
+    loadAnimation,
+    lottieScroll,
+    animateFromTo,
+    animateTo,
   } = useAnimation(ref);
 
-  const move = (className: string, start: number,
-    end: number, immediateRender: boolean = true) => {
-    animateFromTo(className, { y: 40 }, { y: -40 }, start, end, immediateRender);
+  const move = (
+    className: string,
+    start: number,
+    end: number,
+    immediateRender = true,
+  ) => {
+    animateFromTo(
+      className,
+      { y: 40 },
+      { y: -40 },
+      start,
+      end,
+      immediateRender,
+    );
   };
 
-  const opacity = (className: string, start: number, end: number,
-    to: number, immediateRender: boolean = true) => {
+  const opacity = (
+    className: string,
+    start: number,
+    end: number,
+    to: number,
+    immediateRender = true,
+  ) => {
     animateTo(className, { opacity: to }, start, end, immediateRender);
   };
 
@@ -53,7 +73,10 @@ const Anc = () => {
       to: 100,
     });
 
-    const transparencyAnimation = loadAnimation('.lottie-animation-6', transparency);
+    const transparencyAnimation = loadAnimation(
+      '.lottie-animation-6',
+      transparency,
+    );
     lottieScroll(transparencyAnimation, {
       start: 50,
       end: 100,
@@ -63,13 +86,26 @@ const Anc = () => {
     opacity('.lottie-animation-6', 50, 51, 1);
     move('.anc-transparency', 65, 75);
     opacity('.anc-transparency', 65, 70, 1);
-    animateFromTo('.anc-transparency', { opacity: 0.75 }, { opacity: 1 }, 65, 75, false);
+    animateFromTo(
+      '.anc-transparency',
+      { opacity: 0.75 },
+      { opacity: 1 },
+      65,
+      75,
+      false,
+    );
 
     opacity('.airpods-nav', 79, 80, 0, false);
-    animateFromTo('.body', { background: '#000' }, { background: '#fff' }, 79, 80);
+    animateFromTo(
+      '.body',
+      { background: '#000' },
+      { background: '#fff' },
+      79,
+      80,
+    );
     opacity('.white-overlay', 90, 100, 1);
     opacity('.lottie-animation-6', 99, 100, 0, false);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -87,43 +123,45 @@ const Anc = () => {
               in-ear headphones with
               <br />
               Active Noise Cancellation that continuously adapts to the geometry
-              of your ear and the fit of the ear tips —
-              blocking out the world so you can focus on what you’re listening to.
+              of your ear and the fit of the ear tips — blocking out the world
+              so you can focus on what you’re listening to.
             </p>
           </div>
           <div className="anc-external-mic">
             <p className="anc-bullets">
-              An outward-facing microphone detects
-              {' '}
+              An outward-facing microphone detects{' '}
               <span className="white">external sound.</span>
             </p>
           </div>
           <div className="anc-external-sound">
             <p className="anc-bullets anc-paragraph-right">
-              AirPods Pro then counter it with equal
-              {' '}
-              <span className="green">anti-noise</span>
-              , cancelling the
-              {' '}
-              <span className="white">external sound</span>
-              {' '}
-              before you hear it.
+              AirPods Pro then counter it with equal{' '}
+              <span className="green">anti-noise</span>, cancelling the{' '}
+              <span className="white">external sound</span> before you hear it.
             </p>
           </div>
           <div className="anc-internal-mic">
             <p className="anc-paragraph-right">
-              An inward-facing microphone listens inside your ear for unwanted sound,
-              which is also eliminated with
-              {' '}
-              <span className="green">anti-noise</span>
-              .
+              An inward-facing microphone listens inside your ear for unwanted
+              sound, which is also eliminated with{' '}
+              <span className="green">anti-noise</span>.
             </p>
           </div>
           <div className="anc-continousley">
-            <p className="anc-paragraph-right">Noise cancellation is continuously adjusted at 200 times per second for truly immersive sound, so you’re fully tuned in to your music, podcasts, and calls.</p>
+            <p className="anc-paragraph-right">
+              Noise cancellation is continuously adjusted at 200 times per
+              second for truly immersive sound, so you’re fully tuned in to your
+              music, podcasts, and calls.
+            </p>
           </div>
           <div className="anc-transparency">
-            <p className="transparency-paragraph">Want to hear what’s happening around you? Just press and hold the force sensor on the stem to jump between Active Noise Cancellation and Transparency mode — which lets outside sound in, and allows things to sound and feel natural when you’re talking to people nearby.</p>
+            <p className="transparency-paragraph">
+              Want to hear what’s happening around you? Just press and hold the
+              force sensor on the stem to jump between Active Noise Cancellation
+              and Transparency mode — which lets outside sound in, and allows
+              things to sound and feel natural when you’re talking to people
+              nearby.
+            </p>
           </div>
           <div className="white-overlay" />
         </div>

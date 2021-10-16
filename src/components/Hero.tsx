@@ -6,15 +6,37 @@ import useAnimation from '../hooks/useAnimation';
 const Hero = () => {
   const ref = useRef<HTMLDivElement>(null);
   const {
-    enterLeaveTrigger, loadAnimation, lottieScroll, animateFromTo, animateTo,
+    enterLeaveTrigger,
+    loadAnimation,
+    lottieScroll,
+    animateFromTo,
+    animateTo,
   } = useAnimation(ref);
 
-  const move = (index: number, start: number, immediateRender: boolean = true) => {
-    animateFromTo(`.hero-bullet-points._${index}`, { y: 40 }, { y: -40 }, start, start + 20, immediateRender);
+  const move = (index: number, start: number, immediateRender = true) => {
+    animateFromTo(
+      `.hero-bullet-points._${index}`,
+      { y: 40 },
+      { y: -40 },
+      start,
+      start + 20,
+      immediateRender,
+    );
   };
 
-  const opacity = (index: number, start: number, to: number, immediateRender: boolean = true) => {
-    animateTo(`.hero-bullet-points._${index}`, { opacity: to }, start, start + 5, immediateRender);
+  const opacity = (
+    index: number,
+    start: number,
+    to: number,
+    immediateRender = true,
+  ) => {
+    animateTo(
+      `.hero-bullet-points._${index}`,
+      { opacity: to },
+      start,
+      start + 5,
+      immediateRender,
+    );
   };
 
   const animateHeroBullet = (index: number, start: number) => {
@@ -48,7 +70,7 @@ const Hero = () => {
     animateHeroBullet(4, 80);
 
     animateTo('.lottie-animation-1', { opacity: 0 }, 97, 100, false);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

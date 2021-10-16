@@ -6,17 +6,32 @@ import explodeTips from '../assets/explode-tips.json';
 
 const Comfort = () => {
   const ref = useRef<HTMLDivElement>(null);
-  const {
-    enterLeaveTrigger, loadAnimation, lottieScroll, animateFromTo, animateTo,
-  } = useAnimation(ref, true);
+  const { loadAnimation, lottieScroll, animateFromTo, animateTo } =
+    useAnimation(ref, true);
 
-  const move = (className: string, start: number,
-    end: number, immediateRender: boolean = true) => {
-    animateFromTo(className, { y: 40 }, { y: -40 }, start, end, immediateRender);
+  const move = (
+    className: string,
+    start: number,
+    end: number,
+    immediateRender = true,
+  ) => {
+    animateFromTo(
+      className,
+      { y: 40 },
+      { y: -40 },
+      start,
+      end,
+      immediateRender,
+    );
   };
 
-  const opacity = (className: string, start: number, end: number,
-    to: number, immediateRender: boolean = true) => {
+  const opacity = (
+    className: string,
+    start: number,
+    end: number,
+    to: number,
+    immediateRender = true,
+  ) => {
     animateTo(className, { opacity: to }, start, end, immediateRender);
   };
 
@@ -46,7 +61,10 @@ const Comfort = () => {
     move('.comfort-intro-text-wrapper', 55, 65);
     opacity('.comfort-intro-text-wrapper', 55, 56, 1);
 
-    const explodeTipsAnimation = loadAnimation('.lottie-animation-4', explodeTips);
+    const explodeTipsAnimation = loadAnimation(
+      '.lottie-animation-4',
+      explodeTips,
+    );
     lottieScroll(explodeTipsAnimation, {
       start: 60,
       end: 100,
@@ -64,7 +82,7 @@ const Comfort = () => {
     opacity('.comfort-tips', 87, 90, 0, false);
     opacity('.lottie-animation-5', 99, 100, 1);
     opacity('.lottie-animation-4', 99, 100, 0, false);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -79,9 +97,9 @@ const Comfort = () => {
             <p className="comfort-section-intro-text">
               We refined the details of comfort, creating a new
               <br />
-              class of in-ear headphones with a customizable
-              fit that forms an exceptional seal for Active Noise Cancellation .
-              You’ll feel your music, not your headphones.
+              class of in-ear headphones with a customizable fit that forms an
+              exceptional seal for Active Noise Cancellation . You’ll feel your
+              music, not your headphones.
             </p>
           </div>
         </div>
@@ -92,11 +110,15 @@ const Comfort = () => {
             <div className="tip small">Small</div>
           </div>
           <div className="choose-size">
-            <p className="paragraph">Choose from three sizes of soft, flexible silicone tips that click into place.</p>
+            <p className="paragraph">
+              Choose from three sizes of soft, flexible silicone tips that click
+              into place.
+            </p>
           </div>
           <div className="comfort-tip-text">
             <p className="paragraph">
-              These internally tapered tips conform to your ear shape, keeping AirPods Pro secure.
+              These internally tapered tips conform to your ear shape, keeping
+              AirPods Pro secure.
               <br />
               And with vents helping equalize pressure, you
               <br />

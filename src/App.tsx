@@ -18,7 +18,7 @@ import Thanks from './components/Thanks';
 gsap.registerPlugin(ScrollTrigger);
 
 const firebaseConfig: FirebaseOptions = JSON.parse(
-  process.env.REACT_APP_API_KEY,
+  process.env.REACT_APP_API_KEY || '',
 );
 initializeApp(firebaseConfig);
 if (process.env.NODE_ENV !== 'development') {
