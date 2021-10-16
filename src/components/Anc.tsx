@@ -9,102 +9,87 @@ const Anc = () => {
   const {
     enterLeaveTrigger,
     loadAnimation,
-    lottieScroll,
+    animateLottie,
     animateFromTo,
-    animateTo,
+    animateOpacity,
   } = useAnimation(ref);
 
-  const move = (
-    className: string,
-    start: number,
-    end: number,
-    immediateRender = true,
-  ) => {
-    animateFromTo(
-      className,
-      { y: 40 },
-      { y: -40 },
-      start,
-      end,
-      immediateRender,
-    );
-  };
-
-  const opacity = (
-    className: string,
-    start: number,
-    end: number,
-    to: number,
-    immediateRender = true,
-  ) => {
-    animateTo(className, { opacity: to }, start, end, immediateRender);
+  const move = (className: string, start: number, end: number) => {
+    animateFromTo(className, { from: { y: 40 }, to: { y: -40 }, start, end });
   };
 
   useEffect(() => {
     enterLeaveTrigger('.lottie-animation-5, .lottie-animation-6');
 
     move('.anc-intro', 0, 15);
-    opacity('.anc-intro', 0, 5, 1);
+    animateOpacity('.anc-intro', { start: 0, end: 5 });
 
     const flipNCAnimation = loadAnimation('.lottie-animation-5', flipNC);
-    lottieScroll(flipNCAnimation, {
+    animateLottie(flipNCAnimation, {
       start: 1,
       end: 20,
       to: 45,
     });
 
-    opacity('.anc-intro', 10, 15, 0, false);
+    animateOpacity('.anc-intro', { start: 10, end: 15, to: 0 });
 
     move('.anc-intro-paragraph', 15, 25);
-    opacity('.anc-intro-paragraph', 15, 17, 1);
-    opacity('.anc-intro-paragraph', 20, 25, 0, false);
+    animateOpacity('.anc-intro-paragraph', { start: 15, end: 17 });
+    animateOpacity('.anc-intro-paragraph', { start: 20, end: 25, to: 0 });
 
     move('.anc-external-mic, .anc-external-sound', 25, 35);
-    opacity('.anc-external-mic, .anc-external-sound', 25, 27, 1);
-    opacity('.anc-external-mic, .anc-external-sound', 32, 35, 0, false);
+    animateOpacity('.anc-external-mic, .anc-external-sound', {
+      start: 25,
+      end: 27,
+    });
+    animateOpacity('.anc-external-mic, .anc-external-sound', {
+      start: 32,
+      end: 35,
+      to: 0,
+    });
 
     move('.anc-continousley, .anc-internal-mic', 35, 45);
-    opacity('.anc-continousley, .anc-internal-mic', 35, 37, 1);
-    opacity('.anc-continousley, .anc-internal-mic', 42, 45, 0, false);
-
-    lottieScroll(flipNCAnimation, {
-      start: 45,
-      end: 50,
-      to: 100,
+    animateOpacity('.anc-continousley, .anc-internal-mic', {
+      start: 35,
+      end: 37,
     });
+    animateOpacity('.anc-continousley, .anc-internal-mic', {
+      start: 42,
+      end: 45,
+      to: 0,
+    });
+    animateLottie(flipNCAnimation, { start: 45, end: 50, to: 100 });
 
     const transparencyAnimation = loadAnimation(
       '.lottie-animation-6',
       transparency,
     );
-    lottieScroll(transparencyAnimation, {
+    animateLottie(transparencyAnimation, {
       start: 50,
       end: 100,
       to: 99,
     });
-    opacity('.lottie-animation-5', 50, 51, 0, false);
-    opacity('.lottie-animation-6', 50, 51, 1);
+    animateOpacity('.lottie-animation-5', { start: 50, end: 51, to: 0 });
+    animateOpacity('.lottie-animation-6', { start: 50, end: 51 });
     move('.anc-transparency', 65, 75);
-    opacity('.anc-transparency', 65, 70, 1);
-    animateFromTo(
-      '.anc-transparency',
-      { opacity: 0.75 },
-      { opacity: 1 },
-      65,
-      75,
-      false,
-    );
+    animateOpacity('.anc-transparency', { start: 65, end: 70 });
+    animateFromTo('.anc-transparency', {
+      from: { opacity: 0.75 },
+      to: { opacity: 1 },
+      start: 65,
+      end: 75,
+      immediateRender: false,
+    });
 
-    opacity('.airpods-nav', 79, 80, 0, false);
-    animateFromTo(
-      '.body',
-      { background: '#000' },
-      { background: '#fff' },
-      79,
-      80,
-    );
-    opacity('.white-overlay', 90, 100, 1);
-    opacity('.lottie-animation-6', 99, 100, 0, false);
+    animateOpacity('.airpods-nav', { start: 79, end: 80, to: 0 });
+    animateFromTo('.body', {
+      from: { background: '#000' },
+      to: { background: '#fff' },
+      start: 79,
+      end: 80,
+    });
+    animateOpacity('.white-overlay', { start: 90, end: 100 });
+    animateOpacity('.lottie-animation-6', { start: 99, end: 100, to: 0 });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
